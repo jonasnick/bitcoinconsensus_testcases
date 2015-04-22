@@ -49,9 +49,6 @@ int parse_file(FILE* fp, unsigned char scriptPubKey[], unsigned int* scriptPubKe
 }
 
 int main(int argc, char *argv[]) {
-    if (argc < 3) {
-        return 1;
-    }
     FILE *fp;
     fp = fopen(argv[1], "r");
 
@@ -62,7 +59,7 @@ int main(int argc, char *argv[]) {
     unsigned int nIn;
     unsigned int flags;
     parse_file(fp, scriptPubKey, &scriptPubKeyLen, txTo, &txToLen, &nIn, &flags);
-    if (atoi(argv[2]) == 1 || atoi(argv[2]) == 3) {
+    if (argc >= 3 && (atoi(argv[2]) == 1 || atoi(argv[2]) == 3)) {
         printArray(scriptPubKey, scriptPubKeyLen);
         printf("\n");
         printArray(txTo, txToLen);
@@ -74,7 +71,7 @@ int main(int argc, char *argv[]) {
 
     bitcoinconsensus_error err = bitcoinconsensus_ERR_OK;
     int ret = bitcoinconsensus_verify_script(scriptPubKey, scriptPubKeyLen, txTo, txToLen, nIn, flags, &err);
-    if (atoi(argv[2]) == 2 || atoi(argv[2]) == 3) {
+    if (argc >= 3 && (atoi(argv[2]) == 2 || atoi(argv[2]) == 3)) {
         printf("%d\n", ret);
     }
 
