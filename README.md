@@ -8,7 +8,8 @@ This is useful to test agreement between bitcoin and reimplementations.
 Trophy case
 ---
 * btcd 
-    * commit ...
+    * IFDUP: commit ...
+    * EQUAL: 
 
 Instructions
 ---
