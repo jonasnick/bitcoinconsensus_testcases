@@ -3,7 +3,7 @@ var net = require('net');
 var lib = require('./valid_script_lib.js');
 var fs = require('fs');
 
-var socketAddr = './valid_script_stack_socket';
+var socketAddr = process.argv[2];
 var server = net.createServer(function (socket) {
 
     socket.on('data', function (data) {

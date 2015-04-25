@@ -65,9 +65,7 @@ void exec(char* cmd, char *buf) {
 }
 
 
-#define SOCK_PATH "./valid_script_stack_socket"
-
-void execSocket(char* sendFile, char *outbuf) {
+void execSocket(char* sock_path, char* sendFile, char *outbuf) {
     int s, t, len;
     struct sockaddr_un remote;
     char str[100];
@@ -78,7 +76,7 @@ void execSocket(char* sendFile, char *outbuf) {
     }
 
     remote.sun_family = AF_UNIX;
-    strcpy(remote.sun_path, SOCK_PATH);
+    strcpy(remote.sun_path, sock_path);
     len = strlen(remote.sun_path) + sizeof(remote.sun_family);
     if (connect(s, (struct sockaddr *)&remote, len) == -1) {
         perror("connect");
@@ -111,10 +109,6 @@ int main(int argc, char *argv[]) {
     unsigned char stack[1024];
     unsigned int stackSize = 0;
 
-    int ret = bitcoinconsensus_verify_script_stack(scriptPubKey, scriptPubKeyLen, txTo, txToLen, nIn, flags, &err, stack, &stackSize);
-    printArray(stack, stackSize);
-    printf("\n");
-
     const int CALLSTRSIZE = 256;
     char callstr[CALLSTRSIZE];
 
@@ -124,8 +118,13 @@ int main(int argc, char *argv[]) {
         exec(callstr, buffer);
     } else {
         snprintf(callstr, CALLSTRSIZE, "%s", argv[1]);
-        execSocket(callstr, buffer);
+        execSocket(argv[2], callstr, buffer);
     }
+
+    int ret = bitcoinconsensus_verify_script_stack(scriptPubKey, scriptPubKeyLen, txTo, txToLen, nIn, flags, &err, stack, &stackSize);
+    printArray(stack, stackSize);
+    printf("\n");
+
     char bitcoreStack[1024];
     int bitcoreStackLen = getLine(buffer, 2048, bitcoreStack, 1024);
     printArray(bitcoreStack, bitcoreStackLen);

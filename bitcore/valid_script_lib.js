@@ -39,11 +39,11 @@ module.exports.stack = function(fileName, cb) {
           var stack = interpreter.stack;
 
           if (stack.length > 0) {
-              cb(stack[stack.length -1].toString('hex').concat('\n'));
+              cb(stack[stack.length -1].toString('hex').concat(''));
           }
       } catch(err) {
-          cb('\n');
+          cb('');
       }
-      cb('\n')
+      cb('')
     });
 }
