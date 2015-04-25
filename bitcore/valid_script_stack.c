@@ -87,7 +87,7 @@ void execSocket(char* sendFile, char *outbuf) {
 
     send(s, sendFile, strlen(sendFile), 0);
 
-    t=recv(s, outbuf, 2048, 0);
+    t=recv(s, outbuf, 2048, MSG_WAITALL);
     str[t] = '\0';
 
     close(s);

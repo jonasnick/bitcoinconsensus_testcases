@@ -8,7 +8,7 @@ var server = net.createServer(function (socket) {
 
     socket.on('data', function (data) {
         data = data.toString().replace(/(\r\n|\n|\r)/gm,"");
-        lib.stack(data, function(data) {socket.write(data);})
+        lib.stack(data, function(data) {socket.write(data, function() {socket.end();});})
     });
 
 });
