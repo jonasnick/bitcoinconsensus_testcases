@@ -1,7 +1,11 @@
+#!/bin/bash
+set -o nounset
+
 if [ "$#" -ne 1 ] ; then
   echo "Usage: $0 include_directory" >&2
   exit 1
 fi
+
 
 DBPos=0.10-positive
 DBNeg=0.10-negative

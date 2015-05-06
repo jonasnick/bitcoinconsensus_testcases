@@ -74,6 +74,9 @@ int main(int argc, char *argv[]) {
     if (argc >= 3 && (atoi(argv[2]) == 2 || atoi(argv[2]) == 3)) {
         printf("%d\n", ret);
     }
+    if (argc >= 3 && atoi(argv[2]) == 4) {
+        printf("%d\n", err);
+    }
 
     return ret;
 }
