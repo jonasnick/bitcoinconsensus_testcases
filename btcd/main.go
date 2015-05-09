@@ -16,6 +16,7 @@ func main() {
 	if len(os.Args) < 2 {
 		log.Println("Not enough arguments")
 		log.Println("Usage:", os.Args[0], " FILE")
+		os.Exit(0)
 	}
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 
@@ -58,7 +59,7 @@ func main() {
 		log.Fatal(err)
 	}
 
-	script, err := txscript.NewScript(txToMsg.TxIn[nIn].SignatureScript, scriptPubkey, int(nIn), txToMsg, 0)
+	script, err := txscript.NewEngine(scriptPubkey, txToMsg, int(nIn), 0)
 	err = script.Execute()
 	if err != nil {
 		fmt.Println("0")
