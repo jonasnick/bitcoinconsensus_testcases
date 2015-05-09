@@ -10,7 +10,7 @@ btcd and bitcore contain programs to test reimplementations.
 Discovered Bugs
 ---
 * conformal's btcd 
-    * f284b9b3947eb33b91e31deec74936855feed61f: OP_IFDUP assumed less than 32 byte on the stack, OP_0 was different from a negative OP_EQUAL result
+    * [f284b9b](https://github.com/btcsuite/btcd/commit/f284b9b3947eb33b91e31deec74936855feed61f): OP_IFDUP assumed less than 32 byte on the stack, OP_0 was different from a negative OP_EQUAL result
 
 Fuzzing Instructions
 ---
